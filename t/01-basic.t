@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 use v6;
 
-BEGIN { @*INC.unshift: './lib'; }
+#BEGIN { @*INC.unshift: './lib'; }
 
 use HTTP::Status;
 use Test;
