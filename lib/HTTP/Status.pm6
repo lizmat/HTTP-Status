@@ -79,7 +79,7 @@ my %HTTPCODES = {
 };
 
 our sub get_http_status_msg ($code) is export {
-  if %HTTPCODES.exists($code) {
+  if %HTTPCODES{$code}:exists {
     return %HTTPCODES{$code};
   }
   return 'Unknown';
