@@ -6,7 +6,7 @@ module HTTP::Status;
 ## Returns the plain text message that belongs to that code.
 ## Info from http://en.wikipedia.org/wiki/Http_status_codes
 
-my %HTTPCODES = {
+my %HTTPCODES =
   ## 1xx Informational
   100 => 'Continue',
   101 => 'Switching Protocols',
@@ -76,7 +76,7 @@ my %HTTPCODES = {
   598 => 'Network Read Timeout Error',
   599 => 'Network Connect Timeout Error',
   ## End of defined codes.
-};
+;
 
 our sub get_http_status_msg ($code) is export {
   if %HTTPCODES{$code}:exists {
