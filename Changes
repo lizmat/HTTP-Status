@@ -1,0 +1,15 @@
+Revision history for HTTP::Status
+
+{{$NEXT}}
+
+0.0.2  2021-11-25T22:07:59+01:00
+    - Taken over from community modules (Timothy Totten)
+    - Refactored to modern use of Raku capabilities
+    - Returns a HTTP::Status object rather than just a string
+    - Provide a lot more additional information
+    - Add possibility to customize messages
+    - Add extensive pod
+    - Made compatible with App::Mi6
+
+0.0.1  2020-04-29T15:19:10+02:00
+    - Initial version

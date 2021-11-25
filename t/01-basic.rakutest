@@ -1,0 +1,30 @@
+use HTTP::Status;
+use Test;
+
+plan 12;
+
+is get_http_status_msg(200), 'OK',        'Known code 1';
+is get_http_status_msg(404), 'Not Found', 'Known code 2';
+is get_http_status_msg(289), 'Unknown',   'Unknown code 1';
+is get_http_status_msg(607), 'Unknown',   'Unknown code 2';
+
+is HTTP::Status(100),        'Continue',      'is 100 text ok';
+is HTTP::Status(100).code,    100,            'is 100 code ok';
+is HTTP::Status(100).type,   'Informational', 'is 100 type ok';
+ok HTTP::Status(100).summary.chars,           'is 100 summary ok';
+is HTTP::Status(100).origin, 'IANA',          'is 100 origin ok';
+is HTTP::Status(100).since,  'HTTP/1.0',      'is 100 since ok';
+is HTTP::Status(100).RFC,     7231,           'is 100 RFC ok';
+
+HTTP::Status.new(
+  code    => 666,
+  title   => "Too Evil",
+  summary => "That is really not allowed!",
+  origin  => "Hell",
+  since   => "HTTP/6.0",
+  RFC     => 6666,
+);
+
+is HTTP::Status(666), 'Too Evil', 'did the object get made';
+
+# vim: expandtab shiftwidth=4

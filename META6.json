@@ -1,11 +1,26 @@
 {
-  "perl"        : "6.*",
-  "name"        : "HTTP::Status",
-  "version"     : "0.0.1",
-  "description" : "Get the text message associated with an HTTP status code",
-  "depends"     : [ ],
-  "provides"    : {
-    "HTTP::Status" : "lib/HTTP/Status.pm6"
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Information about HTTP Status Codes",
+  "license": "NOASSERTION",
+  "name": "HTTP::Status",
+  "perl": "6.*",
+  "provides": {
+    "HTTP::Status": "lib/HTTP/Status.rakumod"
   },
-  "source-url"  : "git://github.com/raku-community-modules/HTTP-Status.git"
+  "resources": [
+  ],
+  "source-url": "git://github.com/lizmat/HTTP-Status.git",
+  "tags": [
+    "HTTP"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.2"
 }
