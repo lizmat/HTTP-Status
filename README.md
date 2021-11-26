@@ -37,7 +37,7 @@ say "Success" if is-success($code);
 say "Redirection" if is-redirect($code):
 say "Error" if  is-error($code);
 say "Client Error" if is-client-error($code);
-say "Server Error: if is-server-error($code);
+say "Server Error" if is-server-error($code);
 ```
 
 DESCRIPTION
@@ -77,6 +77,12 @@ say $status.origin;  # IANA
 say $status.RFC;     # 7231
 
 say $status.since;   # HTTP/1.0
+```
+
+Finally, if you want to know the source of the information that is provided by this module, use the `source` class method, which returns the URL of the Wikipedia page that was used:
+
+```raku
+say HTTP::Status.source;  # https://en.wikipedia.org/....
 ```
 
 LEGACY INTERFACE
@@ -126,15 +132,15 @@ If you want to add or adapt the information as provided by this class, you can e
 
 ```raku
 HTTP::Status.new(
-  code    => 666,
-  title   => "Too Evil",
-  summary => "That is really not allowed!",
-  origin  => "Hell",
-  since   => "HTTP/6.0",
-  RFC     => 6666,
+  code    => 137,
+  title   => "Very Special Prime",
+  summary => "Really the answer!",
+  origin  => "Mathematics",
+  since   => "HTTP/2.1",
+  RFC     => 13377,
 );
 
-say HTTP::Status(666);  # Too Evil
+say HTTP::Status(137);  # Very Special Prime
 ```
 
 COPYRIGHT AND LICENSE

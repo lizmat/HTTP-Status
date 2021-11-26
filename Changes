@@ -2,6 +2,11 @@ Revision history for HTTP::Status
 
 {{$NEXT}}
 
+0.0.3  2021-11-26T14:33:27+01:00
+    - Add documentation and test for .source class method
+    - Change adding code example
+    - Add test for invalid code
+
 0.0.2  2021-11-25T22:07:59+01:00
     - Taken over from community modules (Timothy Totten)
     - Refactored to modern use of Raku capabilities

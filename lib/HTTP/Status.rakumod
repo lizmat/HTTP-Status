@@ -1,6 +1,6 @@
 my @codes;
 
-class HTTP::Status:ver<0.0.2>:auth<zef:lizmat> {
+class HTTP::Status:ver<0.0.3>:auth<zef:lizmat> {
     has int $.code    is required;
     has str $.title   is required;
     has str $.summary is required;
@@ -382,7 +382,7 @@ say "Success" if is-success($code);
 say "Redirection" if is-redirect($code):
 say "Error" if  is-error($code);
 say "Client Error" if is-client-error($code);
-say "Server Error: if is-server-error($code);
+say "Server Error" if is-server-error($code);
 
 =end code
 
@@ -441,6 +441,16 @@ say $status.since;   # HTTP/1.0
 
 =end code
 
+Finally, if you want to know the source of the information that is
+provided by this module, use the C<source> class method, which
+returns the URL of the Wikipedia page that was used:
+
+=begin code :lang<raku>
+
+say HTTP::Status.source;  # https://en.wikipedia.org/....
+
+=end code
+
 =head1 LEGACY INTERFACE
 
 The legacy interface is identical to the version originally created
@@ -487,15 +497,15 @@ sink context.
 =begin code :lang<raku>
 
 HTTP::Status.new(
-  code    => 666,
-  title   => "Too Evil",
-  summary => "That is really not allowed!",
-  origin  => "Hell",
-  since   => "HTTP/6.0",
-  RFC     => 6666,
+  code    => 137,
+  title   => "Very Special Prime",
+  summary => "Really the answer!",
+  origin  => "Mathematics",
+  since   => "HTTP/2.1",
+  RFC     => 13377,
 );
 
-say HTTP::Status(666);  # Too Evil
+say HTTP::Status(137);  # Very Special Prime
 
 =end code
 

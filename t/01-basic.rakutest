@@ -1,7 +1,7 @@
 use HTTP::Status;
 use Test;
 
-plan 12;
+plan 14;
 
 is get_http_status_msg(200), 'OK',        'Known code 1';
 is get_http_status_msg(404), 'Not Found', 'Known code 2';
@@ -16,15 +16,20 @@ is HTTP::Status(100).origin, 'IANA',          'is 100 origin ok';
 is HTTP::Status(100).since,  'HTTP/1.0',      'is 100 since ok';
 is HTTP::Status(100).RFC,     7231,           'is 100 RFC ok';
 
+is-deeply HTTP::Status(137), Nil, 'does status 137 not exist';
+
 HTTP::Status.new(
-  code    => 666,
-  title   => "Too Evil",
-  summary => "That is really not allowed!",
-  origin  => "Hell",
-  since   => "HTTP/6.0",
-  RFC     => 6666,
+  code    => 137,
+  title   => "Very Special Prime",
+  summary => "Really the answer!",
+  origin  => "Mathematics",
+  since   => "HTTP/2.1",
+  RFC     => 13377,
 );
 
-is HTTP::Status(666), 'Too Evil', 'did the object get made';
+is HTTP::Status(137), 'Very Special Prime', 'did the object get made';
+
+ok HTTP::Status.source.starts-with('https://en.wikipedia.org'),
+  'does the source look ok';
 
 # vim: expandtab shiftwidth=4
