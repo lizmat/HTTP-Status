@@ -38,6 +38,8 @@ say "Redirection" if is-redirect($code):
 say "Error" if  is-error($code);
 say "Client Error" if is-client-error($code);
 say "Server Error" if is-server-error($code);
+
+my %status := HTTP::Status.Map;
 ```
 
 DESCRIPTION
@@ -84,6 +86,41 @@ Finally, if you want to know the source of the information that is provided by t
 ```raku
 say HTTP::Status.source;  # https://en.wikipedia.org/....
 ```
+
+CLASS METHODS
+=============
+
+In this class methods, the `HTTP::Status` class could be considered as an `Associative`.
+
+keys
+----
+
+Returns a `Seq` with the codes for which there is a defined HTTP status.
+
+values
+------
+
+Returns a `Seq` with the `HTTP::Status` objects for which there is a defined HTTP status.
+
+kv
+--
+
+Returns a `Seq` with code / `HTTP::Status` object for which there is a defined HTTP Status.
+
+pairs
+-----
+
+Returns a `Seq` with code => `HTTP::Status` object pairs for which there is a defined HTTP Status.
+
+Hash
+----
+
+Returns a `Hash` with the code => `HTTP::Status` object mappings for which there is a defined HTTP Status.
+
+Map
+---
+
+Returns a `Map` with the code => `HTTP::Status` object mappings for which there is a defined HTTP Status.
 
 LEGACY INTERFACE
 ================
@@ -143,12 +180,21 @@ HTTP::Status.new(
 say HTTP::Status(137);  # Very Special Prime
 ```
 
+AUTHOR
+======
+
+Elizabeth Mattijsen
+
+Source can be located at: https://github.com/lizmat/HTTP-Status . Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a [small sponsorship](https://github.com/sponsors/lizmat/) would mean a great deal to me!
+
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2012-2020 Timothy Totten
+Copyright 2012 - 2020 Timothy Totten
 
-Copyright 2021 Elizabeth Mattijsen
+Copyright 2021 - 2022 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

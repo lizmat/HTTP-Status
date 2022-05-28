@@ -2,6 +2,11 @@ Revision history for HTTP::Status
 
 {{$NEXT}}
 
+0.0.4  2022-05-28T19:08:40+02:00
+    - Fixed issue with status code 599 (it was missing)
+    - Added class methods .keys, .values, .kv, .pairs, .Map, .Hash
+    - Added tests for new class methods
+
 0.0.3  2021-11-26T14:33:27+01:00
     - Add documentation and test for .source class method
     - Change adding code example

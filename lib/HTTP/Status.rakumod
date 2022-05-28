@@ -1,6 +1,6 @@
 my @codes;
 
-class HTTP::Status:ver<0.0.3>:auth<zef:lizmat> {
+class HTTP::Status {
     has int $.code    is required;
     has str $.title   is required;
     has str $.summary is required;
@@ -49,6 +49,14 @@ class HTTP::Status:ver<0.0.3>:auth<zef:lizmat> {
     }
 
     method CALL-ME(HTTP::Status:U: Int() $code) { @codes[$code] // Nil }
+
+    method pairs(HTTP::Status:U:)  { @codes[]:p  }
+    method kv(HTTP::Status:U:)     { @codes[]:kv }
+    method keys(HTTP::Status:U:)   { @codes[]:k  }
+    method values(HTTP::Status:U:) { @codes[]:v  }
+
+    method Map(HTTP::Status:U:)  {  Map.new: @codes[]:p }
+    method Hash(HTTP::Status:U:) { Hash.new: @codes[]:p }
 }
 
 BEGIN {
@@ -330,11 +338,13 @@ BEGIN {
 
     HTTP::Status.new: 599, 'Network Connect Timeout Error',
     Q§An error used by some HTTP proxies to signal a network connect timeout behind the proxy to a client in front of the proxy.§, :origin('(informal convention)');
+
+    42  # make sure the previous HTTP::Status.new sinks
 }
 
 # legacy interface
 our sub get_http_status_msg(Int() $code) is export {
-  (@codes[$code] // 'Unknown').Str
+    (@codes[$code] // 'Unknown').Str
 }
 
 my sub is-info(        $code) is export { 100 <= $code < 200 }
@@ -383,6 +393,8 @@ say "Redirection" if is-redirect($code):
 say "Error" if  is-error($code);
 say "Client Error" if is-client-error($code);
 say "Server Error" if is-server-error($code);
+
+my %status := HTTP::Status.Map;
 
 =end code
 
@@ -451,6 +463,40 @@ say HTTP::Status.source;  # https://en.wikipedia.org/....
 
 =end code
 
+=head1 CLASS METHODS
+
+In this class methods, the C<HTTP::Status> class could be considered
+as an C<Associative>.
+
+=head2 keys
+
+Returns a C<Seq> with the codes for which there is a defined HTTP status.
+
+=head2 values
+
+Returns a C<Seq> with the C<HTTP::Status> objects for which there is a
+defined HTTP status.
+
+=head2 kv
+
+Returns a C<Seq> with code / C<HTTP::Status> object for which there is a
+defined HTTP Status.
+
+=head2 pairs
+
+Returns a C<Seq> with code => C<HTTP::Status> object pairs for which there
+is a defined HTTP Status.
+
+=head2 Hash
+
+Returns a C<Hash> with the code => C<HTTP::Status> object mappings for which
+there is a defined HTTP Status.
+
+=head2 Map
+
+Returns a C<Map> with the code => C<HTTP::Status> object mappings for which
+there is a defined HTTP Status.
+
 =head1 LEGACY INTERFACE
 
 The legacy interface is identical to the version originally created
@@ -509,11 +555,22 @@ say HTTP::Status(137);  # Very Special Prime
 
 =end code
 
+=head1 AUTHOR
+
+Elizabeth Mattijsen
+
+Source can be located at: https://github.com/lizmat/HTTP-Status .
+Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
+
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2012-2020 Timothy Totten
+Copyright 2012 - 2020 Timothy Totten
 
-Copyright 2021 Elizabeth Mattijsen
+Copyright 2021 - 2022 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

@@ -1,0 +1,27 @@
+use Test;
+use HTTP::Status;
+
+plan 12;
+
+my $last := 599;
+
+is-deeply HTTP::Status.keys.head, 100,   "is first code 100";
+is-deeply HTTP::Status.keys.tail, $last, "is last code $last";
+
+is-deeply HTTP::Status.values.head, HTTP::Status(100),   "is first object ok";
+is-deeply HTTP::Status.values.tail, HTTP::Status($last), "is last object ok";
+
+is-deeply HTTP::Status.kv[0], 100,               'is first kv first code';
+is-deeply HTTP::Status.kv[1], HTTP::Status(100), 'is second kv first object';
+is-deeply HTTP::Status.kv[*-2], $last,               'is last-1 kv last code';
+is-deeply HTTP::Status.kv[*-1], HTTP::Status($last), 'is last kv last object';
+
+is-deeply HTTP::Status.pairs.head, 100 => HTTP::Status(100),
+  'is first pair ok';
+is-deeply HTTP::Status.pairs.tail, $last => HTTP::Status($last),
+  'is last pair ok';
+
+is-deeply HTTP::Status.Hash<100>, HTTP::Status(100), 'is Hash access ok';
+is-deeply HTTP::Status.Map<100>,  HTTP::Status(100), 'is Map access ok';
+
+# vim: expandtab shiftwidth=4
