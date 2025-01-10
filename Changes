@@ -1,6 +1,8 @@
 Revision history for HTTP::Status
 
 {{$NEXT}}
+
+0.0.5  2025-01-10T12:46:20+01:00
     - Add CI badge for each OS
     - Update copyright year
 
