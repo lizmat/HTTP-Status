@@ -1,0 +1,15 @@
+use Test::Coverage;
+
+plan 2;
+
+todo "Needs more tests";
+coverage-at-least 75;
+
+todo "Needs more tests";
+uncovered-at-most 1;
+
+source-with-coverage;
+
+report;
+
+# vim: expandtab shiftwidth=4

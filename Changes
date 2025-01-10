@@ -1,6 +1,8 @@
 Revision history for HTTP::Status
 
 {{$NEXT}}
+    - Add CI badge for each OS
+    - Update copyright year
 
 0.0.4  2022-05-28T19:08:40+02:00
     - Fixed issue with status code 599 (it was missing)

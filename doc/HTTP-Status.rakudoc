@@ -1,0 +1,223 @@
+=begin pod
+
+=head1 NAME
+
+HTTP::Status - Information about HTTP Status Codes
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use HTTP::Status;
+
+say HTTP::Status(200);          # OK
+
+say HTTP::Status(200).title;    # OK
+
+say HTTP::Status(200).type;     # Success
+
+say HTTP::Status(200).summary;  # Standard response for successful HTTP...
+
+say HTTP::Status(200).origin;   # IANA
+
+say HTTP::Status(200).since;    # HTTP/1.0
+
+say HTTP::Status(200).RFC;      # 7231
+
+say HTTP::Status(200).code;     # 200
+
+say HTTP::Status.source;        # https://en.wikipedia.org/....
+
+# Legacy interface
+say get_http_status_msg(200);   # OK
+
+say "Informational" if is-info($code);
+say "Success" if is-success($code);
+say "Redirection" if is-redirect($code):
+say "Error" if  is-error($code);
+say "Client Error" if is-client-error($code);
+say "Server Error" if is-server-error($code);
+
+my %status := HTTP::Status.Map;
+
+=end code
+
+=head1 DESCRIPTION
+
+The C<HTTP::Status> class contains information about HTTP Status Codes
+as can be found on
+L<Wikipedia|https://en.wikipedia.org/wiki/List_of_HTTP_status_codes>.
+
+To obtain the information about a given HTTP Status Code, one calls
+the C<HTTP::Status> class with the code in question:
+
+=begin code :lang<raku>
+
+my $status = HTTP::Status(200);
+
+=end code
+
+This returns B<the> C<HTTP::Status> object for the given code, or it
+returns C<Nil> if the code is unknown.
+
+The C<HTTP::Status> object stringifies to its C<title>, and numifies
+to its C<code>:
+
+=begin code :lang<raku>
+
+say $status;   # OK
+
+say +$status;  # 200
+
+=end code
+
+It also contains the type of status code and a summary of additional
+information about that status code that may be useful as a further
+help in debugging issues:
+
+=begin code :lang<raku>
+
+say $status.type;     # Success
+
+say $status.summary;  # Standard response for successful...
+
+=end code
+
+Apart from C<title>, C<type>, C<code> and C<summary>, the object also
+contains information about the applicable C<RFC>, its C<origin> and
+C<since> which version of the HTTP protocol it has been available:
+
+=begin code :lang<raku>
+
+say $status.origin;  # IANA
+
+say $status.RFC;     # 7231
+
+say $status.since;   # HTTP/1.0
+
+=end code
+
+Finally, if you want to know the source of the information that is
+provided by this module, use the C<source> class method, which
+returns the URL of the Wikipedia page that was used:
+
+=begin code :lang<raku>
+
+say HTTP::Status.source;  # https://en.wikipedia.org/....
+
+=end code
+
+=head1 CLASS METHODS
+
+In this class methods, the C<HTTP::Status> class could be considered
+as an C<Associative>.
+
+=head2 keys
+
+Returns a C<Seq> with the codes for which there is a defined HTTP status.
+
+=head2 values
+
+Returns a C<Seq> with the C<HTTP::Status> objects for which there is a
+defined HTTP status.
+
+=head2 kv
+
+Returns a C<Seq> with code / C<HTTP::Status> object for which there is a
+defined HTTP Status.
+
+=head2 pairs
+
+Returns a C<Seq> with code => C<HTTP::Status> object pairs for which there
+is a defined HTTP Status.
+
+=head2 Hash
+
+Returns a C<Hash> with the code => C<HTTP::Status> object mappings for which
+there is a defined HTTP Status.
+
+=head2 Map
+
+Returns a C<Map> with the code => C<HTTP::Status> object mappings for which
+there is a defined HTTP Status.
+
+=head1 LEGACY INTERFACE
+
+The legacy interface is identical to the version originally created
+by C<Timothy Totten>.
+
+=head2 get_http_status_msg
+
+Returns the string for the given HTTP Status code, or C<Unknown>.
+
+=head2 is-info
+
+Returns whether the given HTTP Status code is informational (100..199).
+
+=head2 is-success
+
+Returns whether the given HTTP Status code indicates success (200..299).
+
+=head2 is-redirect
+
+Returns whether the given HTTP Status code indicates a redirection of
+some kind (300..399).
+
+=head2 is-error
+
+Returns whether the given HTTP Status code indicates a some kind of
+error (400..599).
+
+=head2 is-client-error
+
+Returns whether the given HTTP Status code indicates a some kind of
+client error (400..499).
+
+=head2 is-server-error
+
+Returns whether the given HTTP Status code indicates a some kind of
+server error (500..599).
+
+=head1 ADAPTING INFORMATION
+
+If you want to add or adapt the information as provided by this class,
+you can easily do that by creating a new C<HTTP::Status> object in
+sink context.
+
+=begin code :lang<raku>
+
+HTTP::Status.new(
+  code    => 137,
+  title   => "Very Special Prime",
+  summary => "Really the answer!",
+  origin  => "Mathematics",
+  since   => "HTTP/2.1",
+  RFC     => 13377,
+);
+
+say HTTP::Status(137);  # Very Special Prime
+
+=end code
+
+=head1 AUTHOR
+
+Elizabeth Mattijsen
+
+Source can be located at: https://github.com/lizmat/HTTP-Status .
+Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2012 - 2020 Timothy Totten
+
+Copyright 2021, 2022, 2025 Elizabeth Mattijsen
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
+=end pod
+
+# vim: expandtab shiftwidth=4

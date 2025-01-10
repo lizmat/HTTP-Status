@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/lizmat/HTTP-Status/workflows/test/badge.svg)](https://github.com/lizmat/HTTP-Status/actions)
+[![Actions Status](https://github.com/lizmat/HTTP-Status/actions/workflows/linux.yml/badge.svg)](https://github.com/lizmat/HTTP-Status/actions) [![Actions Status](https://github.com/lizmat/HTTP-Status/actions/workflows/macos.yml/badge.svg)](https://github.com/lizmat/HTTP-Status/actions) [![Actions Status](https://github.com/lizmat/HTTP-Status/actions/workflows/windows.yml/badge.svg)](https://github.com/lizmat/HTTP-Status/actions)
 
 NAME
 ====
@@ -194,7 +194,7 @@ COPYRIGHT AND LICENSE
 
 Copyright 2012 - 2020 Timothy Totten
 
-Copyright 2021 - 2022 Elizabeth Mattijsen
+Copyright 2021, 2022, 2025 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
